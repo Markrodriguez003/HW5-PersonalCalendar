@@ -4,6 +4,9 @@ body {
   line-height: 1;
 }
 
+.text{
+  color:rgb(66, 0, 66);
+}
 /* MAIN TOP HEADER JUMBOTRON */
 
 .jumbotron {
@@ -16,6 +19,11 @@ body {
   border-bottom: 10px solid black;
 }
 
+.test{
+  background-color: lawngreen;
+  width: 56px;
+  height: auto;
+}
 
 .navArrow:hover {
   background-color: lawngreen;
