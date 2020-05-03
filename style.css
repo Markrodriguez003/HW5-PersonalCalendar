@@ -4,9 +4,7 @@ body {
   line-height: 1;
 }
 
-.text{
-  color:rgb(66, 0, 66);
-}
+
 /* MAIN TOP HEADER JUMBOTRON */
 
 .jumbotron {
@@ -19,12 +17,7 @@ body {
   border-bottom: 10px solid black;
 }
 
-.test{
-  background-color: lawngreen;
-  width: 56px;
-  height: auto;
-}
-
+ 
 .navArrow:hover {
   background-color: lawngreen;
   background-color: rgb(8, 136, 165);
@@ -102,23 +95,27 @@ textarea {
 }
 
 /* RIGHT SAVE BTN */
-
-.saveBtn {
+.pageBtn {
+  border-left: 1px solid rgb(55, 28, 131);
+  background-color: #06AED5;
+  color: white;
+  margin-bottom: 2px;
+}
+.pageBtn:last-child {
   border-left: 1px solid rgb(55, 28, 131);
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
-  background-color: #06AED5;
+  background-color: rgb(17, 82, 97);
   color: white;
-  /* padding: 35px; */
   margin-bottom: 2px;
 }
 
-.saveBtn i:hover {
+.pageBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
 }
 
-.saveBtn:active {
+.pageBtn:active {
   background-color: lawngreen;
   background-color: rgb(8, 136, 165);
   transform: scale(0.95);
