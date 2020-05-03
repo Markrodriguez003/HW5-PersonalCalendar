@@ -29,7 +29,7 @@ body {
   transform: scale(0.95);
 }
 /* DAY DESCRIPTION ENTRY */
-
+ 
 textarea {
   background: transparent;
   border: none;
@@ -53,6 +53,7 @@ textarea {
   height: 80px;
   border-top: 1px solid white;
 }
+
 
 /* LEFT HOUR BLOCK */
 
@@ -110,7 +111,7 @@ textarea {
   margin-bottom: 2px;
 }
 
-.pageBtn i:hover {
+.pageBtn:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
 }
@@ -120,3 +121,24 @@ textarea {
   background-color: rgb(8, 136, 165);
   transform: scale(0.95);
 }
+
+.deleteEntryBtn {
+  border-left: 1px solid rgb(55, 28, 131);
+  margin-bottom: 2px;
+  font-size: 18px;
+ /*  transition: step-start .3s ease-in-out; */
+  display:none;
+}
+.deleteEntryBtn:last-child {
+ 
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  color: white;
+  margin-bottom: 2px;
+}
+
+.deleteEntryBtn:hover {
+  font-size: 22px;
+  transition: all .3s ease-in-out;
+}
+ 

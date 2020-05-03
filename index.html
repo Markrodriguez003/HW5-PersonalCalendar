@@ -48,15 +48,30 @@
       </div>
     </div>
   </header>
-  <div class="container mainBlockPage time-block mb-4 ">
-  
- 
-<!--     <div class="row">
-      <div class="hour0 col-1 ">6am</div>  
-      <input class="hourEntry col-10 ">  
-      <button class="saveBtn col-1 btn  "></button>  
-      </div> -->
 
+
+  <div class="container mainBlockPage time-block mb-4 ">
+
+    <div class="row rowBlock">
+      <div class="hour col-1" data-timeFrame="past">6am</div>
+      <input class="hourEntry col-9 " data-deleteMsg="Are you sure you would like to delete entry?"
+        data-msg="Type entry here" placeholder="Type entry here" />
+      <button class="btn btn-sm deleteEntryBtn col-1 bg-success text-white">Yes</button>
+      <button class="btn btn-sm deleteEntryBtn col-1 bg-danger text-white">No</button>
+      <button class="col-1 col-offset-2 btn saveBtn pageBtn">Save</button>
+      <button class="col-1 btn clearBtn pageBtn">Clear</button>
+    </div>
+    
+    <div class="row rowBlock">
+      <div class="hour col-1" data-timeFrame="past">6am</div>
+      <input class="hourEntry col-9 " data-deleteMsg="Are you sure you would like to delete entry?"
+        data-msg="Type entry here" placeholder="Type entry here" />
+      <button class="btn btn-sm deleteEntryBtn col-1 bg-success text-white">Yes</button>
+      <button class="btn btn-sm deleteEntryBtn col-1 bg-danger text-white">No</button>
+      <button class="col-1 col-offset-2 btn saveBtn pageBtn">Save</button>
+      <button class="col-1 btn clearBtn pageBtn">Clear</button>
+    </div>
+   
 
   </div>
 
