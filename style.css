@@ -129,7 +129,7 @@ textarea {
 
 .present {
   background-color: #ff6961;
-  color: black;
+  color: white;
 }
 
 .present:hover {
@@ -182,17 +182,12 @@ textarea {
   margin-bottom: 2px;
   font-size: 18px;
   transition: step-start .3s ease-in-out;
-  display: none;
+  display: none;/* 
   -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014); 
-  box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(82, 81, 81, 0.007);
+  box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(82, 81, 81, 0.007); */
 }
 
-.deleteEntryBtn:last-child {
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  color: white;
-  margin-bottom: 2px;
-}
+
 
 .deleteEntryBtn:hover {
   font-size: 22px;
