@@ -63,7 +63,7 @@ $(document).ready(function () {
                     </svg> Save</button>`)
                 .find("button:nth-of-type(3)")
                 .addClass(`col-1 col-offset-2 btn saveBtn saveBtn${i} pageBtn`)
-                .attr("data-btnIndex", `saveBtn${i}`); // Creates save btn
+                .attr("data-btnIndex", `${i}`); // Creates save btn
             $(`.rowBlock${i}`)
                 .append(` <button><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z"/>
@@ -73,6 +73,8 @@ $(document).ready(function () {
                 .addClass(`col-1 btn clearBtn clearBtn${i} pageBtn`)
                 .attr("data-btnIndex", `clrBtn${i}`);// Creates clear btn which triggers yes/no btns above
         }
+        /* 
+                loadEntries(); */
     }
 
     pageLoad(); // Loads and generates hour blocks
@@ -82,76 +84,81 @@ $(document).ready(function () {
     var saveBtn = $(".saveBtn");     // Grabs RIGHT save button
     var clearBtn = $(".clearBtn");   // Grabs RIGHT clear button
     var deleteEntryBtn = $(".deleteEntryBtn"); // Grabs HIDDEN RIGHT delete button
-    var entryArry = [];
+    var entryArry = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
+        null, null, null, null, null];
 
-
+    var btnIndex = 0;
+    var userHourEntry = 0;
+    /* 
+        function loadEntries() {
+            var loadEntiresArr = localStorage.getItem("userHourEntryArry");
+            for (var i = 0; i < DAY_HOURS; i++) {
+            }
+        }
+     */
     var hourDefaultText = $(`<div><svg class="bi bi-watch pb-1" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 012 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0114 8a5.985 5.985 0 01-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 103 8a5 5 0 0010 0z" clip-rule="evenodd"/>
     <rect width="1" height="2" x="13.5" y="7" rx=".5"/>
     <path fill-rule="evenodd" d="M8 4.5a.5.5 0 01.5.5v3a.5.5 0 01-.5.5H6a.5.5 0 010-1h1.5V5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-     </svg> ${hrs[0]}</div>`) 
+     </svg> ${hrs[0]}</div>`)
 
     saveBtn.on("click", function (e) {
         console.log("User pressed: Save Btn");
-        console.log(e.target); // Progination? 
-        var btnIndex = $(this).attr("data-btnIndex"); // Grabs Index no. of save button. Grabs - "Which save button?"
-        /* console.log(btnIndex === "saveBtn0"); */
+        btnIndex = parseInt($(this).attr("data-btnIndex")); //Grabs Index no.
+        console.log(`indexNumber: ${btnIndex}`);
+        userHourEntry = $(`.hourEntry${btnIndex}`).val();
+        entryArry[btnIndex] = userHourEntry;
+        localStorage.setItem("userHourEntryArry", entryArry);
+        console.log(entryArry);
+        console.log(`Value inside Entry Block:INSIDE-SAVEBTN-CLICK: ${btnIndex} is --> ${userHourEntry}`);
 
-        var userHourEntry = hourEntry.val(); // Saves user entry data to variable
-        entryArry.splice(0 /* index here */,0,userHourEntry);
-        console.log(entryArry[0]);
-        localStorage.setItem("userHourEntryArry", entryArry); // Saves user entry data into local storage
+
     })
 
-
-
-
-
-
-
-
-
-
-
-
-
+    console.log(`Value inside Entry Block:BEFORE CLEARBTN: ${btnIndex} is --> ${userHourEntry}`);
 
     clearBtn.on("click", function (e) {
         console.log("User pressed: Clear Btn");
-        console.log($(hourEntry).attr("data-deleteMsg"));
-        var hourEntryholder = hourEntry.val();
-        hourEntry.val($(hourEntry).attr("data-deleteMsg"));
-        $(`.hour${[0]}`).html(warningTriangle);
-        hour.css("background-color", "red");
-        saveBtn.css("display", "none");
-        clearBtn.css("display", "none");
-        deleteEntryBtn.css("display", "block");
+        console.log(`Value inside Entry Block:INSIDE-CLEARBTN-CLICK: ${btnIndex} is --> ${userHourEntry}`);
+        
+        btnIndex = parseInt($(this).attr("data-btnIndex"));
+        var hourEntryholder = $(`.hourEntry${btnIndex}`).val();
+        console.log(`Value inside Entry Block:INSIDE: ${btnIndex} is --> ${hourEntryholder}`);
+        $(`.hourEntry${btnIndex}`).val($(`.hourEntry${btnIndex}`).attr("data-deleteMsg"));
+        $(`.hour${btnIndex}`).html(warningTriangle);
+        $(`.hour${btnIndex}`).css("background-color", "red");
+        $(`.saveBtn${btnIndex}`).css("display", "none");
+        $(`.clearBtn${btnIndex}`).css("display", "none");
+        $(`.deleteEntryBtn${btnIndex}`).css("display", "block");
 
         deleteEntryBtn.on("click", function (e) {
             var userChoice = e.target.innerText.toString().toLowerCase().trim();
-            console.log(userChoice);
 
             if (userChoice === undefined || userChoice === NaN || userChoice === null) {
                 console.log("ERROR!");
-
             } else if (userChoice === "yes") {
                 console.log("You clicked yes!");
-                hourEntry.attr("placeholder", $(hourEntry).attr("data-msg"));
-                hourEntry.val("");
-                $(`.hour${[0]}`).html(hourDefaultText);
-                hour.css("background-color", "white");
+                $(`.hourEntry${btnIndex}`).attr("placeholder", $(`.hourEntry${btnIndex}`).attr("data-msg"));
+                entryArry[btnIndex] = "";
+                $(`.hourEntry${btnIndex}`).val("");
+                $(`.hour${btnIndex}`).html(hourDefaultText);
+                $(`.hour${btnIndex}`).css("background-color", "white");
+                localStorage.setItem("userHourEntryArry", entryArry);
             } else if (userChoice === "no") {
                 console.log("You clicked no!");
-                hourEntry.val(hourEntryholder);
-                $(`.hour${[0]}`).html(hourDefaultText);
-                hour.css("background-color", "white");
+                $(`.hourEntry${btnIndex}`).val(hourEntryholder);
+                $(`.hour${btnIndex}`).html(hourDefaultText);
+                $(`.hour${btnIndex}`).css("background-color", "white");
             }
 
-            saveBtn.css("display", "block");
-            clearBtn.css("display", "block");
-            deleteEntryBtn.css("display", "none");
+            $(`.saveBtn${btnIndex}`).css("display", "block");
+            $(`.clearBtn${btnIndex}`).css("display", "block");
+            $(`.deleteEntryBtn${btnIndex}`).css("display", "none");
         })
     })
+
+    console.log(`Value inside Entry Block:OUTSIDE: ${btnIndex} is --> ${userHourEntry}`);
+
 
     /* console.log($(`.hour${[0]}`).html(`<svg class="bi bi-exclamation-triangle-fill" width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
     <path fill-rule="evenodd" d="M8.982 1.566a1.13 1.13 0 00-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5a.905.905 0 00-.9.995l.35 3.507a.552.552 0 001.1 0l.35-3.507A.905.905 0 008 5zm.002 6a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/>
