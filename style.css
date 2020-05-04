@@ -9,11 +9,11 @@ body {
 }
 
 .background {
-  background-color: rgb(202, 202, 202);
+  background-color: rgb(241, 241, 241);
 }
 
 .styleBox {
-  background-color: rgb(255, 255, 251);
+  background-color: rgb(238, 238, 238);
   padding: 32px;
   margin-bottom: 46px;
   -webkit-box-shadow: 0px 10px 13px -7px #000000, 1px 16px 50px 14px rgba(0, 0, 0, 0.39);
@@ -22,8 +22,10 @@ body {
 }
 
 .mainBlockPage {
-  /*   background-image: url(assets/imgs/clocksBG.jpg); */
-  /*   background-color: rgba(255, 255, 255, 0); */
+/*     background-color: rgba(255, 255, 255, 0);
+    background-image: url(assets/imgs/clocksBG.jpg);
+    background-repeat: cover;
+    background-blend-mode: luminosity; */
   /*   -webkit-box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0);
   box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0, 0, 0, 0); */
 }
@@ -72,17 +74,27 @@ textarea {
 .row {
   white-space: pre-wrap;
   height: 80px;
+  padding-bottom: 4px;
   /*   border-top: 1px solid white; */
 }
 
 /* LEFT HOUR BLOCK */
 
 .hourEntry {
+  background: #F0F0F0;
+  background: -moz-linear-gradient(45deg, #F0F0F0 0%, #E8E8E8 50%, #F0F0F0 100%);
+  background: -webkit-linear-gradient(45deg, #F0F0F0 0%, #E8E8E8 50%, #F0F0F0 100%);
+  background: linear-gradient(45deg, #F0F0F0 0%, #E8E8E8 50%, #F0F0F0 100%);
   font-size: 20px;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014); 
+  box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(82, 81, 81, 0.007);
+  margin-bottom: 4px;
+  background-color:rgb(255, 255, 255);
+  /*   -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 0px 6px 50px 3px rgba(0,0,0,0.13); 
+  box-shadow: 0px 10px 13px -7px #000000, inset 0px 6px 50px 3px rgba(0,0,0,0.13); */
 }
 
 .hour {
- 
   color: rgb(0, 0, 0);
   border-top: 1px dashed #000000;
   border-left: 1px dashed #000000;
@@ -91,9 +103,13 @@ textarea {
   padding-top: 20px;
   font-size: 20px;
   font-weight: 400;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014); 
+  box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(82, 81, 81, 0.007);
+  
 }
 
-.hour:nth-child(even) { /* NOT WORKING */
+.hour:nth-child(even) {
+  /* NOT WORKING */
   background-color: #5f5c5c !important;
   color: #fa5d5d;
 }
@@ -137,6 +153,8 @@ textarea {
   background-color: #06AED5;
   color: white;
   margin-bottom: 2px;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014); 
+  box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(82, 81, 81, 0.007);
 }
 
 .pageBtn:last-child {
@@ -165,6 +183,8 @@ textarea {
   font-size: 18px;
   transition: step-start .3s ease-in-out;
   display: none;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014); 
+  box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(82, 81, 81, 0.007);
 }
 
 .deleteEntryBtn:last-child {
