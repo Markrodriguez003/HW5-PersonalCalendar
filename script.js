@@ -96,10 +96,8 @@ $(document).ready(function () {
     }
 
     saveBtn.on("click", function (e) {
-        console.log("User pressed: Save Btn");
         btnIndex = parseInt($(this).attr("data-btnIndex")); //Grabs Index no.
-        console.log(`THIS: ${this} in saveBTN`);
-        console.log(`indexNumber: ${btnIndex}`);
+        console.log(`User pressed: Save Btn - Index No. : ${btnIndex}`);
         userHourEntry = $(`.hourEntry${btnIndex}`).val();
         entryArry[btnIndex] = userHourEntry;
         localStorage.setItem("userHourEntryArry", entryArry);
@@ -110,26 +108,37 @@ $(document).ready(function () {
 
     clearBtn.on("click", function (e) {
         var userChoice = e.target.innerText.toString().toLowerCase().trim();
-        console.log("User pressed: Clear Btn");
         btnIndex = parseInt($(this).attr("data-btnIndex"));
+        $(`.saveBtn${btnIndex}`).css("display", "none");
+        $(`.clearBtn${btnIndex}`).css("display", "none");
+        $(`.deleteEntryBtn${btnIndex}`).css("display", "block");
 
-        var hourDefaultText = $(`<div><svg class="bi bi-watch pb-1" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 012 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0114 8a5.985 5.985 0 01-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 103 8a5 5 0 0010 0z" clip-rule="evenodd"/>
-            <rect width="1" height="2" x="13.5" y="7" rx=".5"/>
-            <path fill-rule="evenodd" d="M8 4.5a.5.5 0 01.5.5v3a.5.5 0 01-.5.5H6a.5.5 0 010-1h1.5V5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-            </svg> ${hrs[btnIndex]}</div>`)
+        console.log(`User pressed: Clear Btn : ${btnIndex}`);
+      
 
-        var hourEntryholder = $(`.hourEntry${btnIndex}`).val();
         console.log(`Value inside Entry Block:INSIDE: ${btnIndex} is --> ${hourEntryholder}`);
+        var hourEntryholder = $(`.hourEntry${btnIndex}`).val();
         $(`.hourEntry${btnIndex}`).val($(`.hourEntry${btnIndex}`).attr("data-deleteMsg"));
         $(`.hour${btnIndex}`).html(warningTriangle);
         $(`.hour${btnIndex}`).css("background-color", "red");
-        $(`.deleteEntryBtn${btnIndex}`).css("display", "block");
-        $(`.saveBtn${btnIndex}`).css("display", "none");
-        $(`.clearBtn${btnIndex}`).css("display", "none");
 
 
         deleteEntryBtn.on("click", function (e) {
+            
+            var hourDefaultText = $(`<div><svg class="bi bi-watch pb-1" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 012 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0114 8a5.985 5.985 0 01-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 103 8a5 5 0 0010 0z" clip-rule="evenodd"/>
+            <rect width="1" height="2" x="13.5" y="7" rx=".5"/>
+            <path fill-rule="evenodd" d="M8 4.5a.5.5 0 01.5.5v3a.5.5 0 01-.5.5H6a.5.5 0 010-1h1.5V5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+            </svg> ${$(`.hrs${btnIndex}`)}</div>`);
+
+              /*  
+            var hourDefaultText = $(`<div><svg class="bi bi-watch pb-1" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 012 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0114 8a5.985 5.985 0 01-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 103 8a5 5 0 0010 0z" clip-rule="evenodd"/>
+            <rect width="1" height="2" x="13.5" y="7" rx=".5"/>
+            <path fill-rule="evenodd" d="M8 4.5a.5.5 0 01.5.5v3a.5.5 0 01-.5.5H6a.5.5 0 010-1h1.5V5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+            </svg> ${hrs[btnIndex]} </div>`); */
+            
+
             var userChoice = e.target.innerText.toString().toLowerCase().trim();
 
             if (userChoice === undefined || userChoice === NaN || userChoice === null) {
@@ -184,14 +193,14 @@ $(document).ready(function () {
     var currentHr = moment().format("ha"); // SPITS OUT CURRENT HOUR
     var currentHr_HH_Format = parseInt(moment().format("H"));
 
-    var entryBlockClassPre = `hourEntry hourEntry${i} col col-9 present`;
+ /*    var entryBlockClassPre = `hourEntry hourEntry${i} col col-9 present`;
     var entryBlockClassPas = `hourEntry hourEntry${i} col col-9 past `;
     var entryBlockClassFut = `hourEntry hourEntry${i} col col-9 future`;
-
+ */
     /* SETS BLOCK COLOR - PAST / PRESENT / FUTURE put this in loader */
 
-/*     for (var i = 0; i < DAY_HOURS; i++) {
-        if ($(`.hour${i}`).text().trim(" ") === currentHr) {
+    /* for (var i = 0; i < DAY_HOURS; i++) {
+        if ($(`.hour${i}`).text().trim("") === currentHr) {
             console.log(` ${$(`.hour${i}`).text().trim(" ")} is === to ${currentHr}`);
             $(`.hourEntry${i}`).attr("class", entryBlockClassPre);
 
