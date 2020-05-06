@@ -11,9 +11,12 @@ $(document).ready(function () {
                             <path d="M7.002 12a1 1 0 112 0 1 1 0 01-2 0zM7.1 5.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 5.995z"/>
                             </svg>`);
 
-    var entryArry = [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null,
-        null, null, null, null, null];
+    var entryArry = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+    "", "", "", "", ""];
     var loadArry = [];
+    loadArry = JSON.parse(localStorage.getItem("userHourEntryArry"));
+   
+
 
     var mainContainer = $(".mainBlockPage"); // Sets MainContainer to hold generated hour blocks
     function pageLoad() {
@@ -89,21 +92,19 @@ $(document).ready(function () {
     var deleteEntryBtn = $(".deleteEntryBtn"); // Grabs HIDDEN RIGHT delete button
     
     function loadEntries() {
-
-
-            if (loadArry.length === 0 || loadArry === undefined || loadArry === null){
+        
+            if ( loadArry === null){
                 console.log("ARRAY IS EMPTY");
+                console.log(loadArry);
+         
             } else {
                 console.log("Before Load");
                 loadArry = JSON.parse(localStorage.getItem("userHourEntryArry"));
                 console.log(loadArry);
                 for(var i = 0; i < DAY_HOURS; i++){
-                    /* $(`.hourEntry${i}`).val(`test${i}`);*/                    
                     $(`.hourEntry${i}`).val(loadArry[i]);
                 }
-    
             }
-
     }
 
     saveBtn.on("click", function (e) {
@@ -132,6 +133,7 @@ $(document).ready(function () {
         $(`.hourEntry${btnIndex}`).val($(`.hourEntry${btnIndex}`).attr("data-deleteMsg"));
         $(`.hour${btnIndex}`).html(warningTriangle);
         $(`.hour${btnIndex}`).css("background-color", "red");
+        
 
 
         deleteEntryBtn.on("click", function (e) {
@@ -149,8 +151,8 @@ $(document).ready(function () {
             } else if (userChoice === "yes") {
                 console.log("You clicked yes!");
                 $(`.hourEntry${btnIndex}`).attr("placeholder", $(`.hourEntry${btnIndex}`).attr("data-msg"));
-                entryArry[btnIndex] = "";
-                loadArry = JSON.stringify(entryArry);
+                entryArry[btnIndex] = null;
+                loadArry = JSON.stringify(entryArry[btnIndex]);
                 localStorage.setItem("userHourEntryArry", loadArry);
                 $(`.hourEntry${btnIndex}`).val("");
                 $(`.hour${btnIndex}`).html(hourDefaultText); //////////////////////////////
@@ -165,6 +167,7 @@ $(document).ready(function () {
             $(`.saveBtn${btnIndex}`).css("display", "block");
             $(`.clearBtn${btnIndex}`).css("display", "block");
             $(`.deleteEntryBtn${btnIndex}`).css("display", "none");
+        
         })
 
     })
