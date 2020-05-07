@@ -6,19 +6,22 @@ $(document).ready(function () {
     var hrs = ["6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm",
         "7pm", "8pm", "9pm", "10pm", "11pm", "12am", "1am", "2am", "3am", "4am", "5am"];
 
+    var mainContainer = $(".mainBlockPage"); // Sets MainContainer to hold generated hour blocks
+
     var warningTriangle = $(`<svg class="bi bi-exclamation-triangle" width="2em" height="2em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M7.938 2.016a.146.146 0 00-.054.057L1.027 13.74a.176.176 0 00-.002.183c.016.03.037.05.054.06.015.01.034.017.066.017h13.713a.12.12 0 00.066-.017.163.163 0 00.055-.06.176.176 0 00-.003-.183L8.12 2.073a.146.146 0 00-.054-.057A.13.13 0 008.002 2a.13.13 0 00-.064.016zm1.044-.45a1.13 1.13 0 00-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" clip-rule="evenodd"/>
                             <path d="M7.002 12a1 1 0 112 0 1 1 0 01-2 0zM7.1 5.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 5.995z"/>
                             </svg>`);
 
-    var entryArry = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-    "", "", "", "", ""];
+    var entryArry = [];
     var loadArry = [];
-    loadArry = JSON.parse(localStorage.getItem("userHourEntryArry"));
-   
 
+    var currentHr = moment().format("ha"); // SPITS OUT CURRENT HOUR
+    var currentHr_HH_Format = parseInt(moment().format("H"));
 
-    var mainContainer = $(".mainBlockPage"); // Sets MainContainer to hold generated hour blocks
+    console.log(`current hour: ${currentHr}`);
+    console.log(`current hour 24hour: ${currentHr_HH_Format}`);
+
     function pageLoad() {
 
         for (var i = 0; i < DAY_HOURS; i++) { // Loops through all of Hours of the day and sets blocks per index
@@ -40,7 +43,7 @@ $(document).ready(function () {
             $(`.rowBlock${i}`)
                 .append(`<input />`)
                 .find("input")
-                .addClass(`hourEntry hourEntry${i} col col-9 `);   // Creates MIDDLE hour data entry
+                .addClass(`hourEntry hourEntry${i} col col-9 `);
             $(`.hourEntry${i}`)
                 .attr({ // Setting multiple attributes to hour entry block
                     "data-deleteMsg": `Are you sure you would like to delete entry?`,
@@ -80,99 +83,13 @@ $(document).ready(function () {
                 .addClass(`col-1 btn clearBtn clearBtn${i} pageBtn`)
                 .attr("data-btnIndex", `${i}`);// Creates clear btn which triggers yes/no btns above
         }
+        rowColorScheme
         loadEntries();
     }
 
-    pageLoad(); // Loads and generates hour blocks
+    function rowColorScheme() {
 
-    var hour = $(".hour"); // Grabs LEFT hour block
-    var hourEntry = $(".hourEntry"); // Grabs MIDDLE data entry block
-    var saveBtn = $(".saveBtn");     // Grabs RIGHT save button
-    var clearBtn = $(".clearBtn");   // Grabs RIGHT clear button
-    var deleteEntryBtn = $(".deleteEntryBtn"); // Grabs HIDDEN RIGHT delete button
-    
-    function loadEntries() {
-        
-            if ( loadArry === null){
-                console.log("ARRAY IS EMPTY");
-                console.log(loadArry);
-         
-            } else {
-                console.log("Before Load");
-                loadArry = JSON.parse(localStorage.getItem("userHourEntryArry"));
-                console.log(loadArry);
-                for(var i = 0; i < DAY_HOURS; i++){
-                    $(`.hourEntry${i}`).val(loadArry[i]);
-                }
-            }
-    }
-
-    saveBtn.on("click", function (e) {
-        btnIndex = parseInt($(this).attr("data-btnIndex")); //Grabs Index no.
-        console.log(`User pressed: Save Btn - Index No. : ${btnIndex}`);
-        userHourEntry = $(`.hourEntry${btnIndex}`).val();
-        entryArry[btnIndex] = userHourEntry;
-        loadArry = JSON.stringify(entryArry);
-        localStorage.setItem("userHourEntryArry", loadArry);
-        console.log(loadArry);
-        console.log(`Value inside Entry Block:INSIDE-SAVEBTN-CLICK: ${btnIndex} is --> ${userHourEntry}`);
-        console.log(typeof (userHourEntry));
-    })
-
-    clearBtn.on("click", function (e) {
-        var userChoice = e.target.innerText.toString().toLowerCase().trim();
-        btnIndex = parseInt($(this).attr("data-btnIndex"));
-        $(`.saveBtn${btnIndex}`).css("display", "none");
-        $(`.clearBtn${btnIndex}`).css("display", "none");
-        $(`.deleteEntryBtn${btnIndex}`).css("display", "block");
-
-        console.log(`User pressed: Clear Btn : ${btnIndex}`);
-        console.log(`Value inside Entry Block:INSIDE: ${btnIndex} is --> ${hourEntryholder}`);
-
-        var hourEntryholder = $(`.hourEntry${btnIndex}`).val();
-        $(`.hourEntry${btnIndex}`).val($(`.hourEntry${btnIndex}`).attr("data-deleteMsg"));
-        $(`.hour${btnIndex}`).html(warningTriangle);
-        $(`.hour${btnIndex}`).css("background-color", "red");
-        
-
-
-        deleteEntryBtn.on("click", function (e) {
-
-            var hourDefaultText = $(`<div><svg class="bi bi-watch pb-1" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 012 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0114 8a5.985 5.985 0 01-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 103 8a5 5 0 0010 0z" clip-rule="evenodd"/>
-            <rect width="1" height="2" x="13.5" y="7" rx=".5"/>
-            <path fill-rule="evenodd" d="M8 4.5a.5.5 0 01.5.5v3a.5.5 0 01-.5.5H6a.5.5 0 010-1h1.5V5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
-            </svg> ${hrs[btnIndex]} </div>`);
-
-            var userChoice = e.target.innerText.toString().toLowerCase().trim();
-
-            if (userChoice === undefined || userChoice === NaN || userChoice === null) {
-                console.log("ERROR!");
-            } else if (userChoice === "yes") {
-                console.log("You clicked yes!");
-                $(`.hourEntry${btnIndex}`).attr("placeholder", $(`.hourEntry${btnIndex}`).attr("data-msg"));
-                entryArry[btnIndex] = null;
-                loadArry = JSON.stringify(entryArry[btnIndex]);
-                localStorage.setItem("userHourEntryArry", loadArry);
-                $(`.hourEntry${btnIndex}`).val("");
-                $(`.hour${btnIndex}`).html(hourDefaultText); //////////////////////////////
-                $(`.hour${btnIndex}`).css("background-color", "white");
-            } else if (userChoice === "no") {
-                console.log("You clicked no!");
-                $(`.hourEntry${btnIndex}`).val(hourEntryholder);
-                $(`.hour${btnIndex}`).html(hourDefaultText);
-                $(`.hour${btnIndex}`).css("background-color", "white");
-            }
-
-            $(`.saveBtn${btnIndex}`).css("display", "block");
-            $(`.clearBtn${btnIndex}`).css("display", "block");
-            $(`.deleteEntryBtn${btnIndex}`).css("display", "none");
-        
-        })
-
-    })
-
-    /* MOMENT JS  
+        /* MOMENT JS  
     Midnight(12: 00 AM)-- 0000 hrs
     1: 00 AM  -- 0100 hrs - 1
     2: 00 AM  -- 0200 hrs - 2
@@ -198,28 +115,123 @@ $(document).ready(function () {
     10: 00 PM -- 2200 hrs - 22
     11: 00 PM -- 2300 hrs - 23  */
 
-    var currentHr = moment().format("ha"); // SPITS OUT CURRENT HOUR
-    var currentHr_HH_Format = parseInt(moment().format("H"));
+        for (var i = 0; i < DAY_HOURS; i++) {
+            if ($(`.hour${i}`).text().trim("") === currentHr) {
+                console.log(` ${$(`.hour${i}`).text().trim(" ")} is === to ${currentHr}`);
+                $(`.hourEntry${i}`).addClass("present");
+                console.log($(`.hourEntry${i}`).attr("class"));
 
-    /*    var entryBlockClassPre = `hourEntry hourEntry${i} col col-9 present`;
-       var entryBlockClassPas = `hourEntry hourEntry${i} col col-9 past `;
-       var entryBlockClassFut = `hourEntry hourEntry${i} col col-9 future`;
-    */
-    /* SETS BLOCK COLOR - PAST / PRESENT / FUTURE put this in loader */
+            } else if (currentHr_HH_Format < i) {
+                console.log(`HOUR: ${currentHr_HH_Format} CurrentHHFormat  LESS THAN < ${i} : HTML ELEMENT: ${$(".hourEntry").text()} - css: past`);
+                $(`.hourEntry${i}`).addClass("past");
+                console.log($(`.hourEntry${i}`).attr("class"));
 
-    /* for (var i = 0; i < DAY_HOURS; i++) {
-        if ($(`.hour${i}`).text().trim("") === currentHr) {
-            console.log(` ${$(`.hour${i}`).text().trim(" ")} is === to ${currentHr}`);
-            $(`.hourEntry${i}`).attr("class", entryBlockClassPre);
-
-        } else if (currentHr_HH_Format < i) {
-            console.log(`HOUR: ${currentHr_HH_Format} CurrentHHFormat  LESS THAN < ${i} : HTML ELEMENT: ${$(".hourEntry").innerText} - css: past`);
-            $(`.hourEntry${i}`).attr("class", entryBlockClassPas);
-
-        } else if (currentHr_HH_Format > i) {
-            console.log(`HOUR: ${currentHr_HH_Format} CurrentHHFormat GREATER THAN > ${i} : HTML ELEMENT: ${$(".hourEntry").innerText} - css: future`);
-            $(`.hourEntry${i}`).attr("class",entryBlockClassFut);
-
+            } else if (currentHr_HH_Format > i) {
+                console.log(`HOUR: ${currentHr_HH_Format} CurrentHHFormat GREATER THAN > ${i} : HTML ELEMENT: ${$(".hourEntry").text()} - css: future`);
+                $(`.hourEntry${i}`).addClass("future");
+                console.log($(`.hourEntry${i}`).attr("class"));
+            }
         }
-    } */
+    }
+    pageLoad(); // Loads and generates hour blocks
+
+    var hour = $(".hour"); // Grabs LEFT hour block
+    var hourEntry = $(".hourEntry"); // Grabs MIDDLE data entry block
+    var saveBtn = $(".saveBtn");     // Grabs RIGHT save button
+    var clearBtn = $(".clearBtn");   // Grabs RIGHT clear button
+    var deleteEntryBtn = $(".deleteEntryBtn"); // Grabs HIDDEN RIGHT delete button
+    var userHourEntry;
+    var btnIndex;
+
+    function loadEntries() {
+
+        /* check to see if there is a localstorage var named userHourEntryArry and if it's filled. */
+
+        if (localStorage.length === 0) {
+            entryArry = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+                "", "", "", "", ""];
+            loadArry = [];
+            JSON.stringify(entryArry); /////////////////////////////////////////////////////
+            localStorage.setItem("userHourEntryArry", entryArry);
+            console.log("ARRAY IS EMPTY");
+            console.log(entryArry);
+
+        } else {
+            entryArry = JSON.parse(localStorage.getItem("userHourEntryArry"));
+            loadArry = JSON.parse(localStorage.getItem("userHourEntryArry"));
+            console.log(`This is the previously populated/saved array: ${loadArry}`);
+            for (var i = 0; i < DAY_HOURS; i++) {
+                $(`.hourEntry${i}`).val(loadArry[i]);
+            }
+        }
+
+    }
+
+    saveBtn.on("click", function (e) { // THIS WORKS!
+        btnIndex = parseInt($(this).attr("data-btnIndex"));
+        console.log(`User pressed: Save Btn - Index No. : ${btnIndex}`);
+        userHourEntry = $(`.hourEntry${btnIndex}`).val();
+        entryArry[btnIndex] = userHourEntry;
+        console.log(`WHAT ${entryArry}`);
+        loadArry = JSON.stringify(entryArry);////////////////////////////////////////
+        localStorage.setItem("userHourEntryArry", loadArry);
+        console.log(`Index: ${btnIndex} is --> ${userHourEntry} : Inside array: ${loadArry}`);
+    })
+
+    clearBtn.on("click", function (e) { // THIS WORKS
+        var userChoice = e.target.innerText.toString().toLowerCase().trim(); // iS THIS NEEDED?
+
+        console.log(`ENTRY ARRAY inside intro clear:${entryArry}`)
+
+        btnIndex = parseInt($(this).attr("data-btnIndex"));
+        $(`.saveBtn${btnIndex}`).css("display", "none");
+        $(`.clearBtn${btnIndex}`).css("display", "none");
+        $(`.deleteEntryBtn${btnIndex}`).css("display", "block");
+        console.log(`User pressed: Clear Btn : ${btnIndex}`);
+        var hourEntryholder = $(`.hourEntry${btnIndex}`).val();
+        console.log(`Value inside clearBtn-Intro Block:INSIDE: ${btnIndex} is --> ${hourEntryholder}`);
+        $(`.hourEntry${btnIndex}`).val($(`.hourEntry${btnIndex}`).attr("data-deleteMsg"));
+        $(`.hour${btnIndex}`).html(warningTriangle);
+        $(`.hour${btnIndex}`).css("background-color", "red");
+
+        deleteEntryBtn.on("click", function (e) {
+
+            var hourDefaultText = $(`<div><svg class="bi bi-watch pb-1" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 012 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0114 8a5.985 5.985 0 01-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 103 8a5 5 0 0010 0z" clip-rule="evenodd"/>
+            <rect width="1" height="2" x="13.5" y="7" rx=".5"/>
+            <path fill-rule="evenodd" d="M8 4.5a.5.5 0 01.5.5v3a.5.5 0 01-.5.5H6a.5.5 0 010-1h1.5V5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+            </svg> ${hrs[btnIndex]} </div>`);
+
+            var userChoice = e.target.innerText.toString().toLowerCase().trim(); //DOESN'T WORK WHEN CLICKING ICON
+
+            if (userChoice === undefined || userChoice === null) {//THIS WORKS
+                console.log("ERROR!"); // never happens but just in case
+            } else if (userChoice === "yes") {
+                console.log("You clicked yes!");
+                $(`.hourEntry${btnIndex}`).attr("placeholder", $(`.hourEntry${btnIndex}`).attr("data-msg"));
+                console.log(`ENTRY ARRAY before setting clear:${entryArry}`)
+                entryArry[btnIndex] = "";
+                loadArry = JSON.stringify(entryArry);
+                console.log(`ENTRY ARRAY after setting clear:${entryArry}`)
+                localStorage.setItem("userHourEntryArry", loadArry);
+                console.log(`Value inside clearBtn-yes Block:INSIDE: ${btnIndex} is --> ${hourEntryholder} and the array is now: ${loadArry}`);
+                $(`.hourEntry${btnIndex}`).val("");
+                $(`.hour${btnIndex}`).html(hourDefaultText);
+                $(`.hour${btnIndex}`).css("background-color", "white");
+            } else if (userChoice === "no") {
+                console.log("You clicked no!");
+                $(`.hourEntry${btnIndex}`).val(hourEntryholder);
+                $(`.hour${btnIndex}`).html(hourDefaultText);
+                $(`.hour${btnIndex}`).css("background-color", "white");
+            }
+
+            $(`.saveBtn${btnIndex}`).css("display", "block");
+            $(`.clearBtn${btnIndex}`).css("display", "block");
+            $(`.deleteEntryBtn${btnIndex}`).css("display", "none");
+
+        })
+
+    })
+
+
 });

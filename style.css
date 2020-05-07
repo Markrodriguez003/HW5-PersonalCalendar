@@ -117,32 +117,32 @@ textarea {
 /* TIME COLORING (PAST/PRESENT/FUTURE) */
 
 .past {
-  background-color: #c0bdbd;
+  background-color: #c0bdbd !important;
   color: black;
 }
 
 .past:hover {
-  background-color: #8f8e8e;
+  background-color: #8f8e8e !important;
   color: white;
   cursor: pointer;
 }
 
 .present {
-  background-color: #ff6961;
+  background-color: #ff6961 !important;
   color: white;
 }
 
 .present:hover {
-  background-color: #ee534b;
+  background-color: #ee534b !important;
   cursor: pointer;
 }
 
 .future {
-  background-color: #77dd77;
+  background-color: #77dd77 !important;
 }
 
 .future:hover {
-  background-color: #4bd44b;
+  background-color: #4bd44b !important;
   cursor: pointer;
 }
 
