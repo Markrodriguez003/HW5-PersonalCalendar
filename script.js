@@ -6,6 +6,9 @@ $(document).ready(function () {
     var hrs = ["6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm",
         "7pm", "8pm", "9pm", "10pm", "11pm", "12am", "1am", "2am", "3am", "4am", "5am"];
 
+    /*    var hrs_digits = ["6", "7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5", "6",
+           "7", "8", "9", "10", "11", "12", "1", "2", "3", "4", "5"];
+        */
     var mainContainer = $(".mainBlockPage"); // Sets MainContainer to hold generated hour blocks
 
     var warningTriangle = $(`<svg class="bi bi-exclamation-triangle" width="2em" height="2em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
@@ -18,9 +21,6 @@ $(document).ready(function () {
 
     var currentHr = moment().format("ha"); // SPITS OUT CURRENT HOUR
     var currentHr_HH_Format = parseInt(moment().format("H"));
-
-    console.log(`current hour: ${currentHr}`);
-    console.log(`current hour 24hour: ${currentHr_HH_Format}`);
 
     function pageLoad() {
 
@@ -83,53 +83,63 @@ $(document).ready(function () {
                 .addClass(`col-1 btn clearBtn clearBtn${i} pageBtn`)
                 .attr("data-btnIndex", `${i}`);// Creates clear btn which triggers yes/no btns above
         }
-        rowColorScheme
         loadEntries();
+        rowColorScheme();
     }
 
     function rowColorScheme() {
 
         /* MOMENT JS  
     Midnight(12: 00 AM)-- 0000 hrs
-    1: 00 AM  -- 0100 hrs - 1
-    2: 00 AM  -- 0200 hrs - 2
-    3: 00 AM  -- 0300 hrs - 3
-    4: 00 AM  -- 0400 hrs - 4
-    5: 00 AM  -- 0500 hrs - 5
-    6: 00 AM  -- 0600 hrs - 6   - Day start
-    7: 00 AM  -- 0700 hrs - 7
-    8: 00 AM  -- 0800 hrs - 8
-    9: 00 AM  -- 0900 hrs - 9
-    10: 00 AM -- 1000 hrs - 10
-    11: 00 AM -- 1100 hrs - 11
-    12: 00 PM -- 1200 hrs - 12
-    1: 00 PM  -- 1300 hrs - 13
-    2: 00 PM  -- 1400 hrs - 14
-    3: 00 PM  -- 1500 hrs - 15
-    4: 00 PM  -- 1600 hrs - 16
-    5: 00 PM  -- 1700 hrs - 17
-    6: 00 PM  -- 1800 hrs - 18
-    7: 00 PM  -- 1900 hrs - 19
-    8: 00 PM  -- 2000 hrs - 20
-    9: 00 PM  -- 2100 hrs - 21
-    10: 00 PM -- 2200 hrs - 22
-    11: 00 PM -- 2300 hrs - 23  */
+    1: 00 AM  -- 0100 hrs - 0
+    2: 00 AM  -- 0200 hrs - 1
+    3: 00 AM  -- 0300 hrs - 2
+    4: 00 AM  -- 0400 hrs - 3
+    5: 00 AM  -- 0500 hrs - 4
+    6: 00 AM  -- 0600 hrs - 5   - Day start
+    7: 00 AM  -- 0700 hrs - 6
+    8: 00 AM  -- 0800 hrs - 7
+    9: 00 AM  -- 0900 hrs - 8
+    10: 00 AM -- 1000 hrs - 9
+    11: 00 AM -- 1100 hrs - 10
+    12: 00 PM -- 1200 hrs - 11
+    1: 00 PM  -- 1300 hrs - 12
+    2: 00 PM  -- 1400 hrs - 13
+    3: 00 PM  -- 1500 hrs - 14
+    4: 00 PM  -- 1600 hrs - 15
+    5: 00 PM  -- 1700 hrs - 16
+    6: 00 PM  -- 1800 hrs - 17
+    7: 00 PM  -- 1900 hrs - 18
+    8: 00 PM  -- 2000 hrs - 19
+    9: 00 PM  -- 2100 hrs - 20
+    10: 00 PM -- 2200 hrs - 21
+    11: 00 PM -- 2300 hrs - 22  */
 
-        for (var i = 0; i < DAY_HOURS; i++) {
-            if ($(`.hour${i}`).text().trim("") === currentHr) {
-                console.log(` ${$(`.hour${i}`).text().trim(" ")} is === to ${currentHr}`);
+        var userHrIndex;
+        for (var x = 0; x < DAY_HOURS; x++) {
+            if ($(`.hour${x}`).text().trim("") === currentHr) {
+                parseInt(userHrIndex = x);
+                console.log(`userHrIndex = ${x}`);
+
+            } else { console.log("nope") }
+        }
+
+
+        console.log(`THIS IS USER'S CURRENT HOUR INDEX: ${userHrIndex} and is ${typeof (userHrIndex)}`);
+
+
+        for (var i = 0; i <= DAY_HOURS; i++) {
+            if (userHrIndex === i) {
                 $(`.hourEntry${i}`).addClass("present");
-                console.log($(`.hourEntry${i}`).attr("class"));
+                console.log(`${userHrIndex} EQUALS === ${i}`);
 
-            } else if (currentHr_HH_Format < i) {
-                console.log(`HOUR: ${currentHr_HH_Format} CurrentHHFormat  LESS THAN < ${i} : HTML ELEMENT: ${$(".hourEntry").text()} - css: past`);
-                $(`.hourEntry${i}`).addClass("past");
-                console.log($(`.hourEntry${i}`).attr("class"));
-
-            } else if (currentHr_HH_Format > i) {
-                console.log(`HOUR: ${currentHr_HH_Format} CurrentHHFormat GREATER THAN > ${i} : HTML ELEMENT: ${$(".hourEntry").text()} - css: future`);
+            } else if (userHrIndex < i) {
                 $(`.hourEntry${i}`).addClass("future");
-                console.log($(`.hourEntry${i}`).attr("class"));
+
+            } else if (userHrIndex > i) {
+                $(`.hourEntry${i}`).addClass("past");
+
+
             }
         }
     }
@@ -144,8 +154,6 @@ $(document).ready(function () {
     var btnIndex;
 
     function loadEntries() {
-
-        /* check to see if there is a localstorage var named userHourEntryArry and if it's filled. */
 
         if (localStorage.length === 0) {
             entryArry = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
@@ -164,7 +172,6 @@ $(document).ready(function () {
                 $(`.hourEntry${i}`).val(loadArry[i]);
             }
         }
-
     }
 
     saveBtn.on("click", function (e) { // THIS WORKS!
@@ -232,6 +239,5 @@ $(document).ready(function () {
         })
 
     })
-
 
 });
