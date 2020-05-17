@@ -86,7 +86,7 @@ textarea {
   background: -webkit-linear-gradient(45deg, #F0F0F0 0%, #E8E8E8 50%, #F0F0F0 100%);
   background: linear-gradient(45deg, #F0F0F0 0%, #E8E8E8 50%, #F0F0F0 100%); */
   font-size: 20px;
-  color: white;
+  color: black;
   -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014);
   box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(82, 81, 81, 0.007);
   margin-bottom: 4px;
