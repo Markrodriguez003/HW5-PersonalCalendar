@@ -67,13 +67,13 @@ $(document).ready(function () {
                 .addClass(`btn btn-sm deleteEntryBtn deleteEntryBtn${i} col-1 bg-danger text-white`)
                 .attr("data-btnIndex", `${i}`); // Creates no btn
             $(`.rowBlock${i}`)
-                .append(` <button><svg class="bi bi-folder-check" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                .append(` <button type="button" ><svg class="bi bi-folder-check" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M9.828 4H2.19a1 1 0 00-.996 1.09l.637 7a1 1 0 00.995.91H9v1H2.826a2 2 0 01-1.991-1.819l-.637-7a1.99 1.99 0 01.342-1.31L.5 3a2 2 0 012-2h3.672a2 2 0 011.414.586l.828.828A2 2 0 009.828 3h3.982a2 2 0 011.992 2.181L15.546 8H14.54l.265-2.91A1 1 0 0013.81 4H9.828zm-2.95-1.707L7.587 3H2.19c-.24 0-.47.042-.684.12L1.5 2.98a1 1 0 011-.98h3.672a1 1 0 01.707.293z" clip-rule="evenodd"/>
                     <path fill-rule="evenodd" d="M15.854 10.146a.5.5 0 010 .708l-3 3a.5.5 0 01-.708 0l-1.5-1.5a.5.5 0 01.708-.708l1.146 1.147 2.646-2.647a.5.5 0 01.708 0z" clip-rule="evenodd"/>
                     </svg> Save</button>`)
                 .find("button:nth-of-type(3)")
                 .addClass(`col-1 col-offset-2 btn saveBtn saveBtn${i} pageBtn`)
-                .attr("data-btnIndex", `${i}`); // Creates save btn
+                .attr("data-btnIndex", `${i}`, `data-toggle="modal"`, `data-target="#saveSuccessModal"`); // Creates save btn
             $(`.rowBlock${i}`)
                 .append(` <button><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z"/>
@@ -173,7 +173,7 @@ $(document).ready(function () {
             }
         }
     }
-/*  */
+    /* w */
     /*  */
 
     saveBtn.on("click", function (e) { // THIS WORKS!
@@ -185,6 +185,12 @@ $(document).ready(function () {
         loadArry = JSON.stringify(entryArry);////////////////////////////////////////
         localStorage.setItem("userHourEntryArry", loadArry);
         console.log(`Index: ${btnIndex} is --> ${userHourEntry} : Inside array: ${loadArry}`);
+
+
+
+
+       
+
     })
 
     clearBtn.on("click", function (e) { // THIS WORKS
