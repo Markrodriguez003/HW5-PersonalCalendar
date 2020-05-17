@@ -108,6 +108,7 @@ textarea {
   
 }
 
+/*  */
 .hour:nth-child(even) {
   /* NOT WORKING */
   background-color: #5f5c5c !important;
