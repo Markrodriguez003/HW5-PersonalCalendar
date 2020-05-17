@@ -22,7 +22,7 @@ body {
 }
 
 .mainBlockPage {
-/*     background-color: rgba(255, 255, 255, 0);
+  /*     background-color: rgba(255, 255, 255, 0);
     background-image: url(assets/imgs/clocksBG.jpg);
     background-repeat: cover;
     background-blend-mode: luminosity; */
@@ -81,15 +81,16 @@ textarea {
 /* LEFT HOUR BLOCK */
 
 .hourEntry {
-  background: #F0F0F0;
-  background: -moz-linear-gradient(45deg, #F0F0F0 0%, #E8E8E8 50%, #F0F0F0 100%);
+  /*  background: #F0F0F0; */
+  /*   background: -moz-linear-gradient(45deg, #F0F0F0 0%, #E8E8E8 50%, #F0F0F0 100%);
   background: -webkit-linear-gradient(45deg, #F0F0F0 0%, #E8E8E8 50%, #F0F0F0 100%);
-  background: linear-gradient(45deg, #F0F0F0 0%, #E8E8E8 50%, #F0F0F0 100%);
+  background: linear-gradient(45deg, #F0F0F0 0%, #E8E8E8 50%, #F0F0F0 100%); */
   font-size: 20px;
-  -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014); 
+  color: white;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014);
   box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(82, 81, 81, 0.007);
   margin-bottom: 4px;
-  background-color:rgb(255, 255, 255);
+  /*   background-color:rgb(255, 255, 255); */
   /*   -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 0px 6px 50px 3px rgba(0,0,0,0.13); 
   box-shadow: 0px 10px 13px -7px #000000, inset 0px 6px 50px 3px rgba(0,0,0,0.13); */
 }
@@ -103,9 +104,8 @@ textarea {
   padding-top: 20px;
   font-size: 20px;
   font-weight: 400;
-  -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014); 
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014);
   box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(82, 81, 81, 0.007);
-  
 }
 
 /*  */
@@ -124,6 +124,7 @@ textarea {
 
 .past:hover {
   background-color: #8f8e8e !important;
+ 
   color: white;
   cursor: pointer;
 }
@@ -135,6 +136,7 @@ textarea {
 
 .present:hover {
   background-color: #ee534b !important;
+  
   cursor: pointer;
 }
 
@@ -144,6 +146,7 @@ textarea {
 
 .future:hover {
   background-color: #4bd44b !important;
+ 
   cursor: pointer;
 }
 
@@ -154,7 +157,7 @@ textarea {
   background-color: #06AED5;
   color: white;
   margin-bottom: 2px;
-  -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014); 
+  -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014);
   box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(82, 81, 81, 0.007);
 }
 
@@ -183,12 +186,11 @@ textarea {
   margin-bottom: 2px;
   font-size: 18px;
   transition: step-start .3s ease-in-out;
-  display: none;/* 
+  display: none;
+  /* 
   -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014); 
   box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(82, 81, 81, 0.007); */
 }
-
-
 
 .deleteEntryBtn:hover {
   font-size: 22px;
