@@ -24,6 +24,8 @@ $(document).ready(function () {
 
     function pageLoad() {
 
+       
+
         for (var i = 0; i < DAY_HOURS; i++) { // Loops through all of Hours of the day and sets blocks per index
             mainContainer
                 .append("<div>")
@@ -36,14 +38,14 @@ $(document).ready(function () {
                         <path fill-rule="evenodd" d="M8 4.5a.5.5 0 01.5.5v3a.5.5 0 01-.5.5H6a.5.5 0 010-1h1.5V5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
                         </svg> ${hrs[i]}</div>`)
                 .find("div:last")
-                .addClass(`hour hour${i} col col-1`) // Creates LEFT hour block
+                .addClass(`hour hour${i} col col-12 col-sm-12 col-md-1 col-lg-1`) // Creates LEFT hour block
                 .attr("warning-symbol", warningTriangle);
             $(`.hour${i}`)
                 .attr("data-timeFrame", "past"); // Sets data attributes for hour block above
             $(`.rowBlock${i}`)
                 .append(`<input />`)
                 .find("input")
-                .addClass(`hourEntry hourEntry${i} col col-9 `);
+                .addClass(`hourEntry hourEntry${i} col col-12 col-sm-12 col-md-9 col-lg-9`);
             $(`.hourEntry${i}`)
                 .attr({ // Setting multiple attributes to hour entry block
                     "data-deleteMsg": `Are you sure you would like to delete entry?`,
@@ -55,7 +57,7 @@ $(document).ready(function () {
                     <path fill-rule="evenodd" d="M13.854 3.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3.5-3.5a.5.5 0 11.708-.708L6.5 10.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"/>
                     </svg> Yes</button>`)
                 .find("button:nth-of-type(1)")
-                .addClass(`btn btn-sm deleteEntryBtn deleteEntryBtn${i} col-1 bg-success text-white`)
+                .addClass(`btn btn-sm deleteEntryBtn deleteEntryBtn${i} col-6 col-sm-6 col-md-1 col-lg-1 bg-success text-white`)
                 .attr("data-btnIndex", `${i}`); // Creates yes btn
             $(`.rowBlock${i}`)
                 .append(` <button><svg class="bi bi-x-square" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -64,7 +66,7 @@ $(document).ready(function () {
                     <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z" clip-rule="evenodd"/>
                     </svg> No</button>`)
                 .find("button:nth-of-type(2)")
-                .addClass(`btn btn-sm deleteEntryBtn deleteEntryBtn${i} col-1 bg-danger text-white`)
+                .addClass(`btn btn-sm deleteEntryBtn deleteEntryBtn${i} col-6 col-sm-6 col-md-1 col-lg-1 bg-danger text-white`)
                 .attr("data-btnIndex", `${i}`); // Creates no btn
             $(`.rowBlock${i}`)
                 .append(` <button type="button" ><svg class="bi bi-folder-check" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -72,7 +74,7 @@ $(document).ready(function () {
                     <path fill-rule="evenodd" d="M15.854 10.146a.5.5 0 010 .708l-3 3a.5.5 0 01-.708 0l-1.5-1.5a.5.5 0 01.708-.708l1.146 1.147 2.646-2.647a.5.5 0 01.708 0z" clip-rule="evenodd"/>
                     </svg> Save</button>`)
                 .find("button:nth-of-type(3)")
-                .addClass(`col-1 col-offset-2 btn saveBtn saveBtn${i} pageBtn`)
+                .addClass(`col-6 col-offset-2 btn saveBtn saveBtn${i} pageBtn col-sm-6 col-md-1 col-lg-1`)
                 .attr("data-btnIndex", `${i}`, `data-toggle="modal"`, `data-target="#saveSuccessModal"`); // Creates save btn
             $(`.rowBlock${i}`)
                 .append(` <button><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -80,9 +82,12 @@ $(document).ready(function () {
                         <path fill-rule="evenodd" d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" clip-rule="evenodd"/>
                         </svg> Clear </button>`)
                 .find("button:last")
-                .addClass(`col-1 btn clearBtn clearBtn${i} pageBtn`)
+                .addClass(`col-6 btn clearBtn clearBtn${i} pageBtn col-sm-6 col-md-1 col-lg-1`)
                 .attr("data-btnIndex", `${i}`);// Creates clear btn which triggers yes/no btns above
         }
+
+        
+        
         loadEntries();
         rowColorScheme();
     }
@@ -155,7 +160,7 @@ $(document).ready(function () {
 
     function loadEntries() {
 
-        if (localStorage.length === 0) {
+        if (localStorage.length === 0 || localStorage.getItem("userHourEntryArray") === undefined) {
             entryArry = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", ""];
             loadArry = [];
@@ -176,7 +181,21 @@ $(document).ready(function () {
     /* w */
     /*  */
 
-    saveBtn.on("click", function (e) { // THIS WORKS!
+    /*    saveBtn.on("click", function (e) { // THIS WORKS!
+           btnIndex = parseInt($(this).attr("data-btnIndex"));
+           console.log(`User pressed: Save Btn - Index No. : ${btnIndex}`);
+           userHourEntry = $(`.hourEntry${btnIndex}`).val();
+           entryArry[btnIndex] = userHourEntry;
+           console.log(`WHAT ${entryArry}`);
+           loadArry = JSON.stringify(entryArry);////////////////////////////////////////
+           localStorage.setItem("userHourEntryArry", loadArry);
+           console.log(`Index: ${btnIndex} is --> ${userHourEntry} : Inside array: ${loadArry}`);
+   
+       }) */
+
+    /* SHOULD'VE USED THIS INSTEAD OF ABOVE GENERATED CODE */
+
+    $(document).on("click", ".saveBtn", function () {
         btnIndex = parseInt($(this).attr("data-btnIndex"));
         console.log(`User pressed: Save Btn - Index No. : ${btnIndex}`);
         userHourEntry = $(`.hourEntry${btnIndex}`).val();
@@ -185,12 +204,6 @@ $(document).ready(function () {
         loadArry = JSON.stringify(entryArry);////////////////////////////////////////
         localStorage.setItem("userHourEntryArry", loadArry);
         console.log(`Index: ${btnIndex} is --> ${userHourEntry} : Inside array: ${loadArry}`);
-
-
-
-
-       
-
     })
 
     clearBtn.on("click", function (e) { // THIS WORKS
