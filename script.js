@@ -16,6 +16,11 @@ $(document).ready(function () {
                             <path d="M7.002 12a1 1 0 112 0 1 1 0 01-2 0zM7.1 5.995a.905.905 0 111.8 0l-.35 3.507a.552.552 0 01-1.1 0L7.1 5.995z"/>
                             </svg>`);
 
+    var saveIcon = $(`<svg class="bi bi-check-circle" width="1.8em" height="1.8em" viewBox="0 0 16 16" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z" clip-rule="evenodd"/>
+    <path fill-rule="evenodd" d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z" clip-rule="evenodd"/>
+  </svg>`);
+
     var entryArry = [];
     var loadArry = [];
 
@@ -24,7 +29,7 @@ $(document).ready(function () {
 
     function pageLoad() {
 
-       
+
 
         for (var i = 0; i < DAY_HOURS; i++) { // Loops through all of Hours of the day and sets blocks per index
             mainContainer
@@ -75,7 +80,7 @@ $(document).ready(function () {
                     </svg> Save</button>`)
                 .find("button:nth-of-type(3)")
                 .addClass(`col-6 col-offset-2 btn saveBtn saveBtn${i} pageBtn col-sm-6 col-md-1 col-lg-1`)
-                .attr("data-btnIndex", `${i}`, `data-toggle="modal"`, `data-target="#saveSuccessModal"`); // Creates save btn
+                .attr("data-btnIndex", `${i}`); // Creates save btn
             $(`.rowBlock${i}`)
                 .append(` <button><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z"/>
@@ -86,8 +91,8 @@ $(document).ready(function () {
                 .attr("data-btnIndex", `${i}`);// Creates clear btn which triggers yes/no btns above
         }
 
-        
-        
+
+
         loadEntries();
         rowColorScheme();
     }
@@ -204,6 +209,22 @@ $(document).ready(function () {
         loadArry = JSON.stringify(entryArry);////////////////////////////////////////
         localStorage.setItem("userHourEntryArry", loadArry);
         console.log(`Index: ${btnIndex} is --> ${userHourEntry} : Inside array: ${loadArry}`);
+
+        $(`.hour${btnIndex}`).html(saveIcon);
+        $(`.hour${btnIndex}`).css("background-color", "green");
+        setTimeout(() => {
+            var hourDefaultText = $(`<div><svg class="bi bi-watch pb-1" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 012 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0114 8a5.985 5.985 0 01-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 103 8a5 5 0 0010 0z" clip-rule="evenodd"/>
+            <rect width="1" height="2" x="13.5" y="7" rx=".5"/>
+            <path fill-rule="evenodd" d="M8 4.5a.5.5 0 01.5.5v3a.5.5 0 01-.5.5H6a.5.5 0 010-1h1.5V5a.5.5 0 01.5-.5z" clip-rule="evenodd"/>
+            </svg> ${hrs[btnIndex]} </div>`);
+
+            $(`.hour${btnIndex}`).html(hourDefaultText);
+            $(`.hour${btnIndex}`).css("background-color", "white");
+
+        }, 2000);
+
+
     })
 
     clearBtn.on("click", function (e) { // THIS WORKS
@@ -262,3 +283,21 @@ $(document).ready(function () {
     })
 
 });
+
+$("#settingModal").on("click", function(){
+
+    console.log("You pressed settings")
+
+})
+
+$("#deleteModal").on("click", function(){
+
+    console.log("You pressed delete")
+
+})
+
+$("#saveModal").on("click", function(){
+
+    console.log("You pressed delete")
+
+})

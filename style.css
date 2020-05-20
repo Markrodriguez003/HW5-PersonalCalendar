@@ -196,3 +196,11 @@ textarea {
   font-size: 22px;
   transition: all .3s ease-in-out;
 }
+
+
+.modalBoxStyle {
+  padding: 20px;
+  font-size: 24px;
+  border-radius: 44px;
+
+}
