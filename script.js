@@ -26,7 +26,9 @@ $(document).ready(function () {
 
     var currentHr = moment().format("ha"); // SPITS OUT CURRENT HOUR
     var currentHr_HH_Format = parseInt(moment().format("H"));
+    var currentDay = moment().format("MMMM Do YYYY");
 
+    $("#currentDay").text(currentDay);
     function pageLoad() {
 
 
@@ -35,7 +37,7 @@ $(document).ready(function () {
             mainContainer
                 .append("<div>")
                 .find("div:last")
-                .addClass(`row rowBlock${i}`); // Creates Row block
+                .addClass(`row rowBlock${i} col col-12 col-sm-12 col-md-12 col-lg-12`); // Creates Row block
             $(`.rowBlock${i}`)
                 .append(`<div><svg class="bi bi-watch pb-1" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 012 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0114 8a5.985 5.985 0 01-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 103 8a5 5 0 0010 0z" clip-rule="evenodd"/>
@@ -90,8 +92,6 @@ $(document).ready(function () {
                 .addClass(`col-6 btn clearBtn clearBtn${i} pageBtn col-sm-6 col-md-1 col-lg-1`)
                 .attr("data-btnIndex", `${i}`);// Creates clear btn which triggers yes/no btns above
         }
-
-
 
         loadEntries();
         rowColorScheme();
@@ -282,22 +282,32 @@ $(document).ready(function () {
 
     })
 
+
+    
+    
+    $("#settingModal").on("click", function () {
+    
+        console.log("You pressed settings")
+    
+    })
+    
+    $("#deleteModal").on("click", function () {
+/*     
+        console.log("You pressed delete")
+        entryArry = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+            "", "", "", "", ""];
+        JSON.stringify(entryArry); /////////////////////////////////////////////////////
+        localStorage.setItem("userHourEntryArry", entryArry);
+        $(".mainBlockPage").empty();
+        pageLoad(); */
+    
+    })
+    
+    $("#saveModal").on("click", function () {
+    
+        console.log("You pressed delete")
+    
+    })
+
 });
 
-$("#settingModal").on("click", function(){
-
-    console.log("You pressed settings")
-
-})
-
-$("#deleteModal").on("click", function(){
-
-    console.log("You pressed delete")
-
-})
-
-$("#saveModal").on("click", function(){
-
-    console.log("You pressed delete")
-
-})
