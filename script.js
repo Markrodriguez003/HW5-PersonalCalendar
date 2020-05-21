@@ -283,30 +283,37 @@ $(document).ready(function () {
     })
 
 
-    
-    
+
+
     $("#settingModal").on("click", function () {
-    
+
         console.log("You pressed settings")
-    
+
     })
-    
+
     $("#deleteModal").on("click", function () {
-/*     
-        console.log("You pressed delete")
-        entryArry = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
-            "", "", "", "", ""];
-        JSON.stringify(entryArry); /////////////////////////////////////////////////////
-        localStorage.setItem("userHourEntryArry", entryArry);
-        $(".mainBlockPage").empty();
-        pageLoad(); */
-    
+
+        for (var i = 0; i <= DAY_HOURS; i++) {
+
+            $(`.hourEntry${i}`).attr("placeholder", $(`.hourEntry${btnIndex}`).attr("data-msg")); 
+            entryArry[i] = "";
+            console.log($(`.hourEntry${i}`));
+            loadArry = JSON.stringify(entryArry);
+            localStorage.setItem("userHourEntryArry", loadArry);
+            $(`.hourEntry${i}`).val("");
+            $(`.hourEntry${i}`).text("");
+        }
     })
-    
+
     $("#saveModal").on("click", function () {
-    
-        console.log("You pressed delete")
-    
+
+        for (var i = 0; i <= DAY_HOURS; i++) {
+
+            entryArry[i] = $(`.hourEntry${i}`).val();
+            loadArry = JSON.stringify(entryArry);
+            localStorage.setItem("userHourEntryArry", loadArry);
+        }
+
     })
 
 });
