@@ -37,7 +37,7 @@ $(document).ready(function () {
             mainContainer
                 .append("<div>")
                 .find("div:last")
-                .addClass(`row rowBlock${i} col col-12 col-sm-12 col-md-12 col-lg-12`); // Creates Row block
+                .addClass(`row rowBlock rowBlock${i} col col-12 col-sm-12 col-md-12 col-lg-12 mb-3 mt-3`); // Creates Row block
             $(`.rowBlock${i}`)
                 .append(`<div><svg class="bi bi-watch pb-1" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M4 14.333v-1.86A5.985 5.985 0 012 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86A5.985 5.985 0 0114 8a5.985 5.985 0 01-2 4.472v1.861c0 .92-.746 1.667-1.667 1.667H5.667C4.747 16 4 15.254 4 14.333zM13 8A5 5 0 103 8a5 5 0 0010 0z" clip-rule="evenodd"/>
@@ -84,7 +84,7 @@ $(document).ready(function () {
                 .addClass(`col-6 col-offset-2 btn saveBtn saveBtn${i} pageBtn col-sm-6 col-md-1 col-lg-1`)
                 .attr("data-btnIndex", `${i}`); // Creates save btn
             $(`.rowBlock${i}`)
-                .append(` <button><svg class="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                .append(` <button><svg class="bi bi-trash clearIcon" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z"/>
                         <path fill-rule="evenodd" d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" clip-rule="evenodd"/>
                         </svg> Clear </button>`)

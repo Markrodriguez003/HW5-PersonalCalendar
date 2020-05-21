@@ -12,14 +12,15 @@ body {
   background-color: rgb(241, 241, 241);
 }
 
-#mainLogo{
-  width:115px;
-  height:auto;
-
+#mainLogo {
+  width: 115px;
+  height: auto;
 }
 
-.headerContainer{
-  background-color:rgba(70, 68, 68, 0.932);
+.headerContainer {
+  background-color: rgba(70, 68, 68, 0.932);
+  border: teal 2px solid;
+  padding: 22px;
 }
 
 .styleBox {
@@ -48,6 +49,7 @@ body {
   background-color: transparent;
   color: rgb(255, 255, 255);
   border-radius: 0;
+  padding: 14px;
   border-bottom: 10px solid black;
 }
 
@@ -65,35 +67,32 @@ body {
   transform: scale(0.85);
 }
 
-.helperText{
-  
+.helperText {
   font-size: 16px;
 }
 
-.blockExampleText{
+.blockExampleText {
   font-size: 12px;
   padding: 12px;
 }
 
-#greyBlock{
+#greyBlock {
   width: 155px;
   height: 25px;
-  background-color:  #c0bdbd ;
+  background-color: #c0bdbd;
 }
 
-
-#redBlock{
+#redBlock {
   width: 155px;
   height: 25px;
   background-color: #fa5d5d;
 }
 
-#greenBlock{
+#greenBlock {
   width: 155px;
   height: 25px;
   background-color: #77dd77;
 }
-
 
 /* DAY DESCRIPTION ENTRY */
 
@@ -142,23 +141,27 @@ textarea {
 .hour {
   color: rgb(0, 0, 0);
   border-top: 1px dashed #000000;
-  border-left: 1px dashed #000000;
-  border-top-left-radius: 25px;
+  /* border-left: 1px dashed #000000; */
+  /* border-top-left-radius: 25px; */
   border-bottom-left-radius: 25px;
   padding-top: 20px;
-  font-size: 20px;
-  font-weight: 400;
+  padding-right: 14px;
+  font-size: 20px !important;
+  font-weight: 500;
   -webkit-box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(92, 92, 92, 0.014);
   box-shadow: 0px 10px 13px -7px #000000, inset 41px 40px 50px -80px rgba(82, 81, 81, 0.007);
 }
 
 /*  */
+
 .hour:nth-child(even) {
   /* NOT WORKING */
   background-color: #5f5c5c !important;
   color: #fa5d5d;
 }
+
 /*  */
+
 /* TIME COLORING (PAST/PRESENT/FUTURE) */
 
 .past {
@@ -168,7 +171,6 @@ textarea {
 
 .past:hover {
   background-color: #8f8e8e !important;
- 
   color: white;
   cursor: pointer;
 }
@@ -180,7 +182,6 @@ textarea {
 
 .present:hover {
   background-color: #ee534b !important;
-  
   cursor: pointer;
 }
 
@@ -190,7 +191,6 @@ textarea {
 
 .future:hover {
   background-color: #4bd44b !important;
- 
   cursor: pointer;
 }
 
@@ -241,10 +241,75 @@ textarea {
   transition: all .3s ease-in-out;
 }
 
-
 .modalBoxStyle {
   padding: 20px;
   font-size: 24px;
   border-radius: 44px;
+}
 
+@media(max-width: 991px) {
+  .saveBtn {
+    font-size: 12px;
+  }
+  .clearBtn {
+    font-size: 12px;
+  }
+  
+.clearIcon {
+  margin-top: 25px;
+}
+
+.hour {
+  font-size: 13px !important; 
+}
+
+}
+
+
+@media(max-width: 765px) {
+  
+  .hour {
+    font-size: 22px !important;
+  }
+  .rowBlock {
+    padding-bottom: 124px;
+  }
+  .saveBtn {
+    font-size: 22px;
+  }
+  .clearBtn {
+    font-size: 22px;
+  }
+  .clearIcon {
+    margin-top: -6px;
+  }
+}
+
+
+@media(max-width: 395px){
+  .titleText{
+    font-size:28px;
+  }
+  .subTitleText{
+    font-size:16px;
+  }
+}
+@media(max-width: 338px) {
+  
+
+  .hour {
+    font-size: 22px !important;
+  }
+  .rowBlock {
+    padding-bottom: 164px;
+  }
+  .saveBtn {
+    font-size: 18px;
+  }
+  .clearBtn {
+    font-size: 18px;
+  }
+  .clearIcon {
+    margin-top: -6px;
+  }
 }
