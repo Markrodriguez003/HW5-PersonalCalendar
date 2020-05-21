@@ -316,5 +316,11 @@ $(document).ready(function () {
 
     })
 
+
+
+    $("#helperIcon").on("click", function(){
+        console.log("Clicked on helper Icon");
+    })
+
 });
 

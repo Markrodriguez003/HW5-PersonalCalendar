@@ -12,6 +12,16 @@ body {
   background-color: rgb(241, 241, 241);
 }
 
+#mainLogo{
+  width:115px;
+  height:auto;
+
+}
+
+.headerContainer{
+  background-color:rgba(70, 68, 68, 0.932);
+}
+
 .styleBox {
   background-color: rgb(238, 238, 238);
   padding: 32px;
@@ -50,6 +60,40 @@ body {
   background-color: rgb(8, 136, 165);
   transform: scale(0.95);
 }
+
+#helperIcon:active {
+  transform: scale(0.85);
+}
+
+.helperText{
+  
+  font-size: 16px;
+}
+
+.blockExampleText{
+  font-size: 12px;
+  padding: 12px;
+}
+
+#greyBlock{
+  width: 155px;
+  height: 25px;
+  background-color:  #c0bdbd ;
+}
+
+
+#redBlock{
+  width: 155px;
+  height: 25px;
+  background-color: #fa5d5d;
+}
+
+#greenBlock{
+  width: 155px;
+  height: 25px;
+  background-color: #77dd77;
+}
+
 
 /* DAY DESCRIPTION ENTRY */
 
