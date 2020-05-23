@@ -165,10 +165,10 @@ $(document).ready(function () {
 
     function loadEntries() {
 
-        if (localStorage.length === 0 || localStorage.getItem("userHourEntryArray") === undefined) {
+        if (localStorage.length === 0 || localStorage.getItem("userHourEntryArray") === undefined || localStorage.getItem("userHourEntryArray") === null) {
             entryArry = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", ""];
-            loadArry = [];
+            /* loadArry = []; */
             JSON.stringify(entryArry); /////////////////////////////////////////////////////
             localStorage.setItem("userHourEntryArry", entryArry);
             console.log("ARRAY IS EMPTY");
