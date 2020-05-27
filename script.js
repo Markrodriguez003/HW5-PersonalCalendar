@@ -164,40 +164,26 @@ $(document).ready(function () {
     var btnIndex;
 
     function loadEntries() {
+        /* if (localStorage.length === 0 || localStorage.getItem("userHourEntryArray") === undefined || localStorage.getItem("userHourEntryArray") === null) { */
 
-        if (localStorage.length === 0 || localStorage.getItem("userHourEntryArray") === undefined || localStorage.getItem("userHourEntryArray") === null) {
+        
+
+        if (localStorage.getItem("userHourEntryArry") === null) {
             entryArry = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
                 "", "", "", "", ""];
-            /* loadArry = []; */
-            JSON.stringify(entryArry); /////////////////////////////////////////////////////
+            JSON.stringify(entryArry); 
             localStorage.setItem("userHourEntryArry", entryArry);
-            console.log("ARRAY IS EMPTY");
-            console.log(entryArry);
-
+            console.log(`ARRAY IS EMPTY: ${entryArry}`);
         } else {
-            entryArry = JSON.parse(localStorage.getItem("userHourEntryArry"));
-            loadArry = JSON.parse(localStorage.getItem("userHourEntryArry"));
+            entryArry = JSON.parse(localStorage["userHourEntryArry"]);
+            loadArry = JSON.parse(localStorage["userHourEntryArry"]);
             console.log(`This is the previously populated/saved array: ${loadArry}`);
             for (var i = 0; i < DAY_HOURS; i++) {
                 $(`.hourEntry${i}`).val(loadArry[i]);
             }
         }
     }
-    /* w */
-    /*  */
-
-    /*    saveBtn.on("click", function (e) { // THIS WORKS!
-           btnIndex = parseInt($(this).attr("data-btnIndex"));
-           console.log(`User pressed: Save Btn - Index No. : ${btnIndex}`);
-           userHourEntry = $(`.hourEntry${btnIndex}`).val();
-           entryArry[btnIndex] = userHourEntry;
-           console.log(`WHAT ${entryArry}`);
-           loadArry = JSON.stringify(entryArry);////////////////////////////////////////
-           localStorage.setItem("userHourEntryArry", loadArry);
-           console.log(`Index: ${btnIndex} is --> ${userHourEntry} : Inside array: ${loadArry}`);
-   
-       }) */
-
+  
     /* SHOULD'VE USED THIS INSTEAD OF ABOVE GENERATED CODE */
 
     $(document).on("click", ".saveBtn", function () {
@@ -282,13 +268,8 @@ $(document).ready(function () {
 
     })
 
-
-
-
     $("#settingModal").on("click", function () {
-
         console.log("You pressed settings")
-
     })
 
     $("#deleteModal").on("click", function () {
@@ -313,9 +294,7 @@ $(document).ready(function () {
             loadArry = JSON.stringify(entryArry);
             localStorage.setItem("userHourEntryArry", loadArry);
         }
-
     })
-
 
 
     $("#helperIcon").on("click", function(){
